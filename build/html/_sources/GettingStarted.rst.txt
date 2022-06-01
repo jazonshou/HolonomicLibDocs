@@ -1,0 +1,7 @@
+.. _getting_started:
+
+###############
+Getting Started
+###############
+
+Thank you for checking out Holonomic Lib
