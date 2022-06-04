@@ -11,3 +11,10 @@ Welcome to HolonomicLib's documentation!
    :caption: Introduction
 
    Docs/Intro/GettingStarted
+
+.. toctree::
+   :titlesonly:
+   :caption: Programming
+
+   Docs/Programming/Setup
+   Docs/Programming/Opcontrol

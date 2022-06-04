@@ -16,15 +16,25 @@ You can check if PROS is correctly installed by running ``pros --version`` in th
 the terminal returns something like ``pros, version [LATEST_VERSION]``, then you are good to go!
 
 Installing HolonomicLib
------------------------
+=======================
 
 1. Download the latest version of `HolonomicLib <https://github.com/Yessir120/HolonomicLib/releases>`_
-   in the root of your project. 
-2. Run ``pros conductor fetch HolonomicLib.zip`` 
+   in the root of your project (it should be ``HolonomicLib@<VERSION_#>.zip``). 
+2. Run ``pros conductor fetch HolonomicLib@<VERSION_#>.zip`` 
 3. Run ``pros conductor apply HolonomicLib``
 4. Add ``#include "HolonomicLib/API.hpp"`` to your header file
 
-Installing Pathplanner
+Installing Pathplanner (optional)
+=================================
+
+If you want to follow trajectories, you must install Pathplanner. 
+
+1. Download the latest version of `Pathplanner <https://github.com/mjansen4857/pathplanner/releases>`_
+2. Download ``convertor.exe`` from `HolonomicLib <https://github.com/Yessir120/HolonomicLib/releases>`_
+   to the root of your project
+
+Hardware Prerequisites
 ----------------------
 
-Pathplanner is the software we use to generate Trajectories for the chassis to follow. 
+- Must have a mecanum or X-Drive chassis
+- Must have 3 tracking wheels that are capable of using OkapiLib's odometry
