@@ -37,8 +37,7 @@ Next, create an ``AsyncHolonomicChassisController`` object. This will be used to
 .. code-block:: cpp
     :linenos:
 
-    std::shared_ptr<HolonomicLib::AsyncHolonomicChassisController> controller = 
-    HolonomicLib::AsyncHolonomicChassisControllerBuilder()
+    std::shared_ptr<AsyncHolonomicChassisController> controller = AsyncHolonomicChassisControllerBuilder()
         // Output chassis controller (must be created before this)
         .withOutput(chassis)
         // PID gains (must be tuned for your robot)

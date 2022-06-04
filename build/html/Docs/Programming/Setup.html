@@ -196,18 +196,17 @@ a <code class="docutils literal notranslate"><span class="pre">OdomChassisContro
 please checkout the <a class="reference external" href="https://okapilib.github.io/OkapiLib/index.html">Okapi documentation</a>.</p>
 </div>
 <p>Next, create an <code class="docutils literal notranslate"><span class="pre">AsyncHolonomicChassisController</span></code> object. This will be used to control the robot.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">HolonomicLib</span><span class="o">::</span><span class="n">AsyncHolonomicChassisController</span><span class="o">&gt;</span> <span class="n">controller</span> <span class="o">=</span>
-<span class="linenos"> 2</span><span class="n">HolonomicLib</span><span class="o">::</span><span class="n">AsyncHolonomicChassisControllerBuilder</span><span class="p">()</span>
-<span class="linenos"> 3</span>    <span class="c1">// Output chassis controller (must be created before this)</span>
-<span class="linenos"> 4</span>    <span class="p">.</span><span class="n">withOutput</span><span class="p">(</span><span class="n">chassis</span><span class="p">)</span>
-<span class="linenos"> 5</span>    <span class="c1">// PID gains (must be tuned for your robot)</span>
-<span class="linenos"> 6</span>    <span class="p">.</span><span class="n">withPIDGains</span><span class="p">(</span>
-<span class="linenos"> 7</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">},</span> <span class="c1">// Translation gains</span>
-<span class="linenos"> 8</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">}</span> <span class="c1">// Turn gains</span>
-<span class="linenos"> 9</span>    <span class="p">)</span>
-<span class="linenos">10</span>    <span class="c1">// Tolerance (how close the chassis must be to the target before stopping)</span>
-<span class="linenos">11</span>    <span class="p">.</span><span class="n">withTolerance</span><span class="p">({</span><span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">1</span><span class="n">_deg</span><span class="p">})</span>
-<span class="linenos">12</span>    <span class="p">.</span><span class="n">build</span><span class="p">();</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">AsyncHolonomicChassisController</span><span class="o">&gt;</span> <span class="n">controller</span> <span class="o">=</span> <span class="n">AsyncHolonomicChassisControllerBuilder</span><span class="p">()</span>
+<span class="linenos"> 2</span>    <span class="c1">// Output chassis controller (must be created before this)</span>
+<span class="linenos"> 3</span>    <span class="p">.</span><span class="n">withOutput</span><span class="p">(</span><span class="n">chassis</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="c1">// PID gains (must be tuned for your robot)</span>
+<span class="linenos"> 5</span>    <span class="p">.</span><span class="n">withPIDGains</span><span class="p">(</span>
+<span class="linenos"> 6</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">},</span> <span class="c1">// Translation gains</span>
+<span class="linenos"> 7</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">}</span> <span class="c1">// Turn gains</span>
+<span class="linenos"> 8</span>    <span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="c1">// Tolerance (how close the chassis must be to the target before stopping)</span>
+<span class="linenos">10</span>    <span class="p">.</span><span class="n">withTolerance</span><span class="p">({</span><span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">1</span><span class="n">_deg</span><span class="p">})</span>
+<span class="linenos">11</span>    <span class="p">.</span><span class="n">build</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>More information regarding the API can be found <a class="reference external" href="https://yessir120.github.io/HolonomicLib/html/index.html">here</a></p>
