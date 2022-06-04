@@ -49,3 +49,5 @@ Next, create an ``AsyncHolonomicChassisController`` object. This will be used to
         // Tolerance (how close the chassis must be to the target before stopping)
         .withTolerance({2_in, 2_in, 1_deg})
         .build();
+
+More information regarding the API can be found `here <https://yessir120.github.io/HolonomicLib/html/index.html>`_

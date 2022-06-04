@@ -1,6 +1,6 @@
-#########
-Opcontrol
-#########
+######################
+Field Oriented Control
+######################
 
 Out of the numerous reasons why holonomic drivetrains are superior to traditional tank drives, 
 one key reason is that field oriented control is possible. For those that do not know what 
@@ -33,3 +33,5 @@ Next, use a controller and the ``fieldOrientedXArcade`` method to move the chass
             pros::delay(10);
         }
     }
+
+More information regarding the API can be found `here <https://yessir120.github.io/HolonomicLib/html/index.html>`_

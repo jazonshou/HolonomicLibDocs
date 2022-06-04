@@ -18,3 +18,5 @@ Welcome to HolonomicLib's documentation!
 
    Docs/Programming/Setup
    Docs/Programming/Opcontrol
+   Docs/Programming/AutonTranslate
+   Docs/Programming/AutonPathing
