@@ -34,4 +34,4 @@ Next, use a controller and the ``fieldOrientedXArcade`` method to move the chass
         }
     }
 
-More information regarding the API can be found `here <https://yessir120.github.io/HolonomicLib/html/index.html>`_
+More information regarding the HolonomicLib API can be found `here <https://yessir120.github.io/HolonomicLib/html/index.html>`_

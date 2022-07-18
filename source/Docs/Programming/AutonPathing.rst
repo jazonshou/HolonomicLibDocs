@@ -28,3 +28,5 @@ Following the Trajectory
 
 1. ``controller->setTarget(TRAJECTORY_NAME, true)`` will make the chassis follow the trajectory
    (please see the previous article on Autonomous Translation for more details about Async behavior)
+
+More information regarding the HolonomicLib API can be found `here <https://yessir120.github.io/HolonomicLib/html/index.html>`_
