@@ -20,3 +20,9 @@ Welcome to HolonomicLib's documentation!
    Docs/Programming/Opcontrol
    Docs/Programming/AutonTranslate
    Docs/Programming/AutonPathing
+
+.. toctree::
+   :titlesonly:
+   :caption: Explanation
+
+   Docs/Explanation/Guide
