@@ -25,4 +25,4 @@ Welcome to HolonomicLib's documentation!
    :titlesonly:
    :caption: Explanation
 
-   Docs/Explanation/Guide
+   Docs/Explanation/FieldOrientedControl

@@ -30,6 +30,20 @@ Generating the Trajectory
 4. The generated trajectory will be copied to your clipboard. You can paste the generated trajectory 
    into your project. 
 
+If all goes well, you should end up with something like this in your clipboard: 
+
+.. code-block:: cpp
+    TimedTrajectory TRAJECTORY_NAME = {
+    { 0.0, 0.0, 0.0, 0.0},
+    { 0.09546349735777332, 0.01836722730983333, 9.648426277155382e-05, 0.36},
+    { 0.13455982283961315, 0.051983191444950824, 0.000631472862023017, 0.72},
+    { 0.1642595449156504, 0.08842596962282846, 0.0016073473094173115, 1.08},
+    { 0.18904986189801176, 0.1260008448867695, 0.0030294971278352094, 1.44},
+    { 0.21067589573536047, 0.16403984120698523, 0.004898353906373502, 1.8},
+    { 0.2300362863012862, 0.2022085110479, 0.007212444922835768, 2.16},
+    ...
+    };
+
 Following the Trajectory
 ------------------------
 
@@ -41,6 +55,7 @@ Here is the full example code:
 .. code-block:: cpp
     :linenos:
 
+    /** Create Okapi OdomChassisControler - used as a base for HolonomicLib's chassis controller */
     std::shared_ptr<OdomChassisController> chassis = ChassisControllerBuilder()
         .withMotors(
             1,  // Top left
@@ -58,6 +73,7 @@ Here is the full example code:
         .withOdometry({{2.75_in, 7_in, 1_in, 2.75_in}, quadEncoderTPR})
         .buildOdometry();
 
+    /** Create HolonomicLib AsyncHolonomicChassisController - controls chassis movement */
     std::shared_ptr<AsyncHolonomicChassisController> controller = AsyncHolonomicChassisControllerBuilder()
         // Output chassis controller (must be created before this)
         .withOutput(chassis)
@@ -70,8 +86,11 @@ Here is the full example code:
         .withTolerance({2_in, 2_in, 1_deg})
         .build();
 
+    /** Opcontrol: moves chassis according to Pathplanner path */
     void opcontrol() {
-        TimedTrajectory path = {...}; // Pathplanner path
+        // Pathplanner path: generated with Pathplanner
+        // Converted to TimedTrajectory via convertor.exe 
+        TimedTrajectory path = {...}; 
 
         controller->setTarget(path, true);
     }
