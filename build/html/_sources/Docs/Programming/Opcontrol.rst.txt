@@ -39,6 +39,7 @@ Here is a complete example:
 .. code-block:: cpp
     :linenos:
 
+    /** Create Okapi OdomChassisController */
     std::shared_ptr<OdomChassisController> chassis = ChassisControllerBuilder()
         .withMotors(
             1,  // Top left
@@ -56,9 +57,12 @@ Here is a complete example:
         .withOdometry({{2.75_in, 7_in, 1_in, 2.75_in}, quadEncoderTPR})
         .buildOdometry();
 
+    /** Cast OdomChassisController model to XDriveModel */
     std::shared_ptr<XDriveModel> model = std::static_pointer_cast<XDriveModel> (chassis->getModel());
 
+    /** Opcontrol: uses field oriented control to control the chassis */
     void opcontrol() {
+
         Controller controller = Controller();
         while(true) {
             model->fieldOrientedXArcade(master.getAnalog(ControllerAnalog::leftY), 

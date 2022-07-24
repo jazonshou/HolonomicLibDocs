@@ -40,6 +40,7 @@ Here is a complete example:
 .. code-block:: cpp
     :linenos:
 
+    /** Create Okapi OdomChassisController - used as a base for HolonomicLib's chassis controller */
     std::shared_ptr<OdomChassisController> chassis = ChassisControllerBuilder()
         .withMotors(
             1,  // Top left
@@ -57,6 +58,7 @@ Here is a complete example:
         .withOdometry({{2.75_in, 7_in, 1_in, 2.75_in}, quadEncoderTPR})
         .buildOdometry();
 
+    /** Create HolonomicLib AsyncHolonomicChassisController - controls chassis movement */
     std::shared_ptr<AsyncHolonomicChassisController> controller = AsyncHolonomicChassisControllerBuilder()
         // Output chassis controller (must be created before this)
         .withOutput(chassis)
@@ -69,6 +71,7 @@ Here is a complete example:
         .withTolerance({2_in, 2_in, 1_deg})
         .build();
 
+    /** Opcontrol: moves chassis to a target position */
     void opcontrol() {
         controller->setTarget({XPOSE_in, YPOSE_in, ZPOSE_deg}, true);
     }

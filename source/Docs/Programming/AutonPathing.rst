@@ -14,10 +14,10 @@ Setting Up Pathplanner
 4. Outside of the menu, customize the "Generator Settings" with appropriate max velocites 
    and max accelerations
 
-.. image:: Photos/image1.PNG
+.. image:: ../Photos/image1.PNG
     :scale: 35%
 
-.. image:: Photos/image2.PNG
+.. image:: ../Photos/image2.PNG
     :scale: 35%
 
 Generating the Trajectory
@@ -33,6 +33,7 @@ Generating the Trajectory
 If all goes well, you should end up with something like this in your clipboard: 
 
 .. code-block:: cpp
+    
     TimedTrajectory TRAJECTORY_NAME = {
     { 0.0, 0.0, 0.0, 0.0},
     { 0.09546349735777332, 0.01836722730983333, 9.648426277155382e-05, 0.36},

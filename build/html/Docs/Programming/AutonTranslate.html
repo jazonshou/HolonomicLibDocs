@@ -98,6 +98,10 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Autonomous Translation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="AutonPathing.html">Autonomous Path Following</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Explanation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Explanation/FieldOrientedControl.html">Explanation: Field Oriented Control</a></li>
+</ul>
 
             
           
@@ -192,38 +196,41 @@ use the do something like this:</p>
 </pre></div>
 </div>
 <p>Here is a complete example:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">OdomChassisController</span><span class="o">&gt;</span> <span class="n">chassis</span> <span class="o">=</span> <span class="n">ChassisControllerBuilder</span><span class="p">()</span>
-<span class="linenos"> 2</span>    <span class="p">.</span><span class="n">withMotors</span><span class="p">(</span>
-<span class="linenos"> 3</span>        <span class="mi">1</span><span class="p">,</span>  <span class="c1">// Top left</span>
-<span class="linenos"> 4</span>        <span class="mi">-2</span><span class="p">,</span> <span class="c1">// Top right (reversed)</span>
-<span class="linenos"> 5</span>        <span class="mi">-3</span><span class="p">,</span> <span class="c1">// Bottom right (reversed)</span>
-<span class="linenos"> 6</span>        <span class="mi">4</span>   <span class="c1">// Bottom left</span>
-<span class="linenos"> 7</span>    <span class="p">)</span>
-<span class="linenos"> 8</span>    <span class="p">.</span><span class="n">withSensors</span><span class="p">(</span>
-<span class="linenos"> 9</span>        <span class="n">ADIEncoder</span><span class="p">{</span><span class="sc">&#39;A&#39;</span><span class="p">,</span> <span class="sc">&#39;B&#39;</span><span class="p">},</span> <span class="c1">// left encoder in ADI ports A &amp; B</span>
-<span class="linenos">10</span>        <span class="n">ADIEncoder</span><span class="p">{</span><span class="sc">&#39;C&#39;</span><span class="p">,</span> <span class="sc">&#39;D&#39;</span><span class="p">,</span> <span class="nb">true</span><span class="p">},</span>  <span class="c1">// right encoder in ADI ports C &amp; D (reversed)</span>
-<span class="linenos">11</span>        <span class="n">ADIEncoder</span><span class="p">{</span><span class="sc">&#39;E&#39;</span><span class="p">,</span> <span class="sc">&#39;F&#39;</span><span class="p">}</span>  <span class="c1">// middle encoder in ADI ports E &amp; F</span>
-<span class="linenos">12</span>    <span class="p">)</span>
-<span class="linenos">13</span>    <span class="c1">// specify the tracking wheels diameter (2.75 in), track (7 in), and TPR (360)</span>
-<span class="linenos">14</span>    <span class="c1">// specify the middle encoder distance (1 in) and diameter (2.75 in)</span>
-<span class="linenos">15</span>    <span class="p">.</span><span class="n">withOdometry</span><span class="p">({{</span><span class="mf">2.75</span><span class="n">_in</span><span class="p">,</span> <span class="mi">7</span><span class="n">_in</span><span class="p">,</span> <span class="mi">1</span><span class="n">_in</span><span class="p">,</span> <span class="mf">2.75</span><span class="n">_in</span><span class="p">},</span> <span class="n">quadEncoderTPR</span><span class="p">})</span>
-<span class="linenos">16</span>    <span class="p">.</span><span class="n">buildOdometry</span><span class="p">();</span>
-<span class="linenos">17</span>
-<span class="linenos">18</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">AsyncHolonomicChassisController</span><span class="o">&gt;</span> <span class="n">controller</span> <span class="o">=</span> <span class="n">AsyncHolonomicChassisControllerBuilder</span><span class="p">()</span>
-<span class="linenos">19</span>    <span class="c1">// Output chassis controller (must be created before this)</span>
-<span class="linenos">20</span>    <span class="p">.</span><span class="n">withOutput</span><span class="p">(</span><span class="n">chassis</span><span class="p">)</span>
-<span class="linenos">21</span>    <span class="c1">// PID gains (must be tuned for your robot)</span>
-<span class="linenos">22</span>    <span class="p">.</span><span class="n">withPIDGains</span><span class="p">(</span>
-<span class="linenos">23</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">},</span> <span class="c1">// Translation gains</span>
-<span class="linenos">24</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">}</span> <span class="c1">// Turn gains</span>
-<span class="linenos">25</span>    <span class="p">)</span>
-<span class="linenos">26</span>    <span class="c1">// Tolerance (how close the chassis must be to the target before stopping)</span>
-<span class="linenos">27</span>    <span class="p">.</span><span class="n">withTolerance</span><span class="p">({</span><span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">1</span><span class="n">_deg</span><span class="p">})</span>
-<span class="linenos">28</span>    <span class="p">.</span><span class="n">build</span><span class="p">();</span>
-<span class="linenos">29</span>
-<span class="linenos">30</span><span class="kt">void</span> <span class="nf">opcontrol</span><span class="p">()</span> <span class="p">{</span>
-<span class="linenos">31</span>    <span class="n">controller</span><span class="o">-&gt;</span><span class="n">setTarget</span><span class="p">({</span><span class="n">XPOSE_in</span><span class="p">,</span> <span class="n">YPOSE_in</span><span class="p">,</span> <span class="n">ZPOSE_deg</span><span class="p">},</span> <span class="nb">true</span><span class="p">);</span>
-<span class="linenos">32</span><span class="p">}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cm">/** Create Okapi OdomChassisController - used as a base for HolonomicLib&#39;s chassis controller */</span>
+<span class="linenos"> 2</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">OdomChassisController</span><span class="o">&gt;</span> <span class="n">chassis</span> <span class="o">=</span> <span class="n">ChassisControllerBuilder</span><span class="p">()</span>
+<span class="linenos"> 3</span>    <span class="p">.</span><span class="n">withMotors</span><span class="p">(</span>
+<span class="linenos"> 4</span>        <span class="mi">1</span><span class="p">,</span>  <span class="c1">// Top left</span>
+<span class="linenos"> 5</span>        <span class="mi">-2</span><span class="p">,</span> <span class="c1">// Top right (reversed)</span>
+<span class="linenos"> 6</span>        <span class="mi">-3</span><span class="p">,</span> <span class="c1">// Bottom right (reversed)</span>
+<span class="linenos"> 7</span>        <span class="mi">4</span>   <span class="c1">// Bottom left</span>
+<span class="linenos"> 8</span>    <span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="p">.</span><span class="n">withSensors</span><span class="p">(</span>
+<span class="linenos">10</span>        <span class="n">ADIEncoder</span><span class="p">{</span><span class="sc">&#39;A&#39;</span><span class="p">,</span> <span class="sc">&#39;B&#39;</span><span class="p">},</span> <span class="c1">// left encoder in ADI ports A &amp; B</span>
+<span class="linenos">11</span>        <span class="n">ADIEncoder</span><span class="p">{</span><span class="sc">&#39;C&#39;</span><span class="p">,</span> <span class="sc">&#39;D&#39;</span><span class="p">,</span> <span class="nb">true</span><span class="p">},</span>  <span class="c1">// right encoder in ADI ports C &amp; D (reversed)</span>
+<span class="linenos">12</span>        <span class="n">ADIEncoder</span><span class="p">{</span><span class="sc">&#39;E&#39;</span><span class="p">,</span> <span class="sc">&#39;F&#39;</span><span class="p">}</span>  <span class="c1">// middle encoder in ADI ports E &amp; F</span>
+<span class="linenos">13</span>    <span class="p">)</span>
+<span class="linenos">14</span>    <span class="c1">// specify the tracking wheels diameter (2.75 in), track (7 in), and TPR (360)</span>
+<span class="linenos">15</span>    <span class="c1">// specify the middle encoder distance (1 in) and diameter (2.75 in)</span>
+<span class="linenos">16</span>    <span class="p">.</span><span class="n">withOdometry</span><span class="p">({{</span><span class="mf">2.75</span><span class="n">_in</span><span class="p">,</span> <span class="mi">7</span><span class="n">_in</span><span class="p">,</span> <span class="mi">1</span><span class="n">_in</span><span class="p">,</span> <span class="mf">2.75</span><span class="n">_in</span><span class="p">},</span> <span class="n">quadEncoderTPR</span><span class="p">})</span>
+<span class="linenos">17</span>    <span class="p">.</span><span class="n">buildOdometry</span><span class="p">();</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="cm">/** Create HolonomicLib AsyncHolonomicChassisController - controls chassis movement */</span>
+<span class="linenos">20</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">AsyncHolonomicChassisController</span><span class="o">&gt;</span> <span class="n">controller</span> <span class="o">=</span> <span class="n">AsyncHolonomicChassisControllerBuilder</span><span class="p">()</span>
+<span class="linenos">21</span>    <span class="c1">// Output chassis controller (must be created before this)</span>
+<span class="linenos">22</span>    <span class="p">.</span><span class="n">withOutput</span><span class="p">(</span><span class="n">chassis</span><span class="p">)</span>
+<span class="linenos">23</span>    <span class="c1">// PID gains (must be tuned for your robot)</span>
+<span class="linenos">24</span>    <span class="p">.</span><span class="n">withPIDGains</span><span class="p">(</span>
+<span class="linenos">25</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">},</span> <span class="c1">// Translation gains</span>
+<span class="linenos">26</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">}</span> <span class="c1">// Turn gains</span>
+<span class="linenos">27</span>    <span class="p">)</span>
+<span class="linenos">28</span>    <span class="c1">// Tolerance (how close the chassis must be to the target before stopping)</span>
+<span class="linenos">29</span>    <span class="p">.</span><span class="n">withTolerance</span><span class="p">({</span><span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">1</span><span class="n">_deg</span><span class="p">})</span>
+<span class="linenos">30</span>    <span class="p">.</span><span class="n">build</span><span class="p">();</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="cm">/** Opcontrol: moves chassis to a target position */</span>
+<span class="linenos">33</span><span class="kt">void</span> <span class="nf">opcontrol</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">34</span>    <span class="n">controller</span><span class="o">-&gt;</span><span class="n">setTarget</span><span class="p">({</span><span class="n">XPOSE_in</span><span class="p">,</span> <span class="n">YPOSE_in</span><span class="p">,</span> <span class="n">ZPOSE_deg</span><span class="p">},</span> <span class="nb">true</span><span class="p">);</span>
+<span class="linenos">35</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>More information regarding the HolonomicLib API can be found <a class="reference external" href="https://yessir120.github.io/HolonomicLib/html/index.html">here</a></p>
