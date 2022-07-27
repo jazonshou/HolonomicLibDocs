@@ -23,7 +23,8 @@ Setting Up Pathplanner
 Generating the Trajectory
 -------------------------
 
-1. Draw your desired path in pathplanner
+1. Draw your desired path in pathplanner (yes, I know, it's a FRC field; just treat it as a normal
+   VEX field with meters as its units... paths are relative anyways so it doesn't really matter)
 2. Run ``convertor.exe`` (downloaded previously) by running ``./convertor`` in the terminal, 
    located in the root of your project
 3. Input the name of your path into the terminal when prompted 
