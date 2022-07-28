@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
 
   
   
@@ -35,6 +36,7 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/tabs.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -97,6 +99,12 @@
 <li class="toctree-l1"><a class="reference internal" href="Opcontrol.html">Field Oriented Control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="AutonTranslate.html">Autonomous Translation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="AutonPathing.html">Autonomous Path Following</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Explanation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Explanation/FieldOrientedControl.html">Explanation: Field Oriented Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Explanation/Translation.html">Explanation: Holonomic Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Explanation/Pathing.html">Explanation: Holonomic Path Following</a></li>
 </ul>
 
             
@@ -195,18 +203,96 @@ a <code class="docutils literal notranslate"><span class="pre">OdomChassisContro
 <p>For more details on Okapi’s <code class="docutils literal notranslate"><span class="pre">OdomChassisController</span></code>,
 please checkout the <a class="reference external" href="https://okapilib.github.io/OkapiLib/index.html">Okapi documentation</a>.</p>
 </div>
-<p>Next, create an <code class="docutils literal notranslate"><span class="pre">AsyncHolonomicChassisController</span></code> object. This will be used to control the robot.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">AsyncHolonomicChassisController</span><span class="o">&gt;</span> <span class="n">controller</span> <span class="o">=</span> <span class="n">AsyncHolonomicChassisControllerBuilder</span><span class="p">()</span>
-<span class="linenos"> 2</span>    <span class="c1">// Output chassis controller (must be created before this)</span>
-<span class="linenos"> 3</span>    <span class="p">.</span><span class="n">withOutput</span><span class="p">(</span><span class="n">chassis</span><span class="p">)</span>
-<span class="linenos"> 4</span>    <span class="c1">// PID gains (must be tuned for your robot)</span>
-<span class="linenos"> 5</span>    <span class="p">.</span><span class="n">withPIDGains</span><span class="p">(</span>
-<span class="linenos"> 6</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">},</span> <span class="c1">// Translation gains</span>
-<span class="linenos"> 7</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">}</span> <span class="c1">// Turn gains</span>
-<span class="linenos"> 8</span>    <span class="p">)</span>
-<span class="linenos"> 9</span>    <span class="c1">// Tolerance (how close the chassis must be to the target before stopping)</span>
-<span class="linenos">10</span>    <span class="p">.</span><span class="n">withTolerance</span><span class="p">({</span><span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">1</span><span class="n">_deg</span><span class="p">})</span>
-<span class="linenos">11</span>    <span class="p">.</span><span class="n">build</span><span class="p">();</span>
+<p>Next, create an <code class="docutils literal notranslate"><span class="pre">AsyncHolonomicChassisController</span></code> object using the AsyncHolonomicChassisControllerBuilder.
+This will be used to control the robot.</p>
+<ol class="arabic simple">
+<li><p>The constructor takes an
+<a class="reference external" href="https://okapilib.github.io/OkapiLib/classokapi_1_1OdomChassisController.html">OdomChassisController</a>
+that will be used to move the chassis.</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Abstract</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">AsyncHolonomicChassisController</span><span class="o">&gt;</span> <span class="n">controller</span> <span class="o">=</span>
+    <span class="n">AsyncHolonomicChassisControllerBuilder</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">okapi</span><span class="o">::</span><span class="n">OdomChassisController</span><span class="o">&gt;</span> <span class="n">ichassis</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></div>
+<ol class="arabic simple" start="2">
+<li><p>Configure PID controllers - you need 2 controllers: one for turning and one for translation</p></li>
+</ol>
+<p>One way you can configure the PID is by inputing the gains directly.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">Abstract</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">withDistGains</span><span class="p">(</span><span class="k">const</span> <span class="n">okapi</span><span class="o">::</span><span class="n">IterativePosPIDController</span><span class="o">::</span><span class="n">Gains</span> <span class="o">&amp;</span><span class="n">idistGains</span><span class="p">)</span>
+<span class="p">.</span><span class="n">withTurnGains</span><span class="p">(</span><span class="k">const</span> <span class="n">okapi</span><span class="o">::</span><span class="n">IterativePosPIDController</span><span class="o">::</span><span class="n">Gains</span> <span class="o">&amp;</span><span class="n">iturnGains</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></div>
+<p>Another way is to supply the actual PID controller objects.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Abstract</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">withDistPID</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">okapi</span><span class="o">::</span><span class="n">IterativePosPIDController</span><span class="o">&gt;</span> <span class="n">idistController</span><span class="p">)</span>
+<span class="p">.</span><span class="n">withTurnPID</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">okapi</span><span class="o">::</span><span class="n">IterativePosPIDController</span><span class="o">&gt;</span> <span class="n">iturnController</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></div>
+<ol class="arabic simple" start="3">
+<li><p>(Optional) Configure the settle parameters for the PID controllers.</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-3-3-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-3-3-0" name="3-0" role="tab" tabindex="0">Abstract</button></div><div aria-labelledby="tab-3-3-0" class="sphinx-tabs-panel" id="panel-3-3-0" name="3-0" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">withDistSettleParameters</span><span class="p">(</span><span class="n">okapi</span><span class="o">::</span><span class="n">QLength</span> <span class="n">imaxError</span><span class="p">,</span>
+                          <span class="n">okapi</span><span class="o">::</span><span class="n">QSpeed</span> <span class="n">imaxDerivative</span><span class="p">,</span>
+                          <span class="n">okapi</span><span class="o">::</span><span class="n">QTime</span> <span class="n">iwaitTime</span><span class="p">)</span>
+<span class="p">.</span><span class="n">withTurnSettleParameters</span><span class="p">(</span><span class="n">okapi</span><span class="o">::</span><span class="n">QLength</span> <span class="n">imaxError</span><span class="p">,</span>
+                          <span class="n">okapi</span><span class="o">::</span><span class="n">QSpeed</span> <span class="n">imaxDerivative</span><span class="p">,</span>
+                          <span class="n">okapi</span><span class="o">::</span><span class="n">QTime</span> <span class="n">iwaitTime</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></div>
+<ol class="arabic simple" start="4">
+<li><p>Finally, build the controller!</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-4-4-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-4-4-0" name="4-0" role="tab" tabindex="0">Abstract</button></div><div aria-labelledby="tab-4-4-0" class="sphinx-tabs-panel" id="panel-4-4-0" name="4-0" role="tabpanel" tabindex="0"><div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></div>
+<p>Here is a complete example of what you might do.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">OdomChassisController</span><span class="o">&gt;</span> <span class="n">chassis</span> <span class="o">=</span> <span class="n">ChassisControllerBuilder</span><span class="p">()</span>
+<span class="linenos"> 2</span>    <span class="p">.</span><span class="n">withMotors</span><span class="p">(</span>
+<span class="linenos"> 3</span>        <span class="mi">1</span><span class="p">,</span>  <span class="c1">// Top left</span>
+<span class="linenos"> 4</span>        <span class="mi">-2</span><span class="p">,</span> <span class="c1">// Top right (reversed)</span>
+<span class="linenos"> 5</span>        <span class="mi">-3</span><span class="p">,</span> <span class="c1">// Bottom right (reversed)</span>
+<span class="linenos"> 6</span>        <span class="mi">4</span>   <span class="c1">// Bottom left</span>
+<span class="linenos"> 7</span>    <span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="p">.</span><span class="n">withSensors</span><span class="p">(</span>
+<span class="linenos"> 9</span>        <span class="n">ADIEncoder</span><span class="p">{</span><span class="sc">&#39;A&#39;</span><span class="p">,</span> <span class="sc">&#39;B&#39;</span><span class="p">},</span> <span class="c1">// left encoder in ADI ports A &amp; B</span>
+<span class="linenos">10</span>        <span class="n">ADIEncoder</span><span class="p">{</span><span class="sc">&#39;C&#39;</span><span class="p">,</span> <span class="sc">&#39;D&#39;</span><span class="p">,</span> <span class="nb">true</span><span class="p">},</span>  <span class="c1">// right encoder in ADI ports C &amp; D (reversed)</span>
+<span class="linenos">11</span>        <span class="n">ADIEncoder</span><span class="p">{</span><span class="sc">&#39;E&#39;</span><span class="p">,</span> <span class="sc">&#39;F&#39;</span><span class="p">}</span>  <span class="c1">// middle encoder in ADI ports E &amp; F</span>
+<span class="linenos">12</span>    <span class="p">)</span>
+<span class="linenos">13</span>    <span class="c1">// specify the tracking wheels diameter (2.75 in), track (7 in), and TPR (360)</span>
+<span class="linenos">14</span>    <span class="c1">// specify the middle encoder distance (1 in) and diameter (2.75 in)</span>
+<span class="linenos">15</span>    <span class="p">.</span><span class="n">withOdometry</span><span class="p">({{</span><span class="mf">2.75</span><span class="n">_in</span><span class="p">,</span> <span class="mi">7</span><span class="n">_in</span><span class="p">,</span> <span class="mi">1</span><span class="n">_in</span><span class="p">,</span> <span class="mf">2.75</span><span class="n">_in</span><span class="p">},</span> <span class="n">quadEncoderTPR</span><span class="p">})</span>
+<span class="linenos">16</span>    <span class="p">.</span><span class="n">buildOdometry</span><span class="p">();</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">AsyncHolonomicChassisController</span><span class="o">&gt;</span> <span class="n">controller</span> <span class="o">=</span>
+<span class="linenos">19</span>  <span class="n">AsyncHolonomicChassisControllerBuilder</span><span class="p">(</span><span class="n">chassis</span><span class="p">)</span>
+<span class="linenos">20</span>    <span class="c1">// PID gains (must be tuned for your robot)</span>
+<span class="linenos">21</span>    <span class="p">.</span><span class="n">withDistGains</span><span class="p">(</span>
+<span class="linenos">22</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">}</span> <span class="c1">// Translation gains</span>
+<span class="linenos">23</span>    <span class="p">)</span>
+<span class="linenos">24</span>    <span class="p">.</span><span class="n">withTurnGains</span><span class="p">(</span>
+<span class="linenos">25</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">}</span> <span class="c1">// Turn gains</span>
+<span class="linenos">26</span>    <span class="p">)</span>
+<span class="linenos">27</span>    <span class="c1">// Tolerance (how close the chassis must be to the target before stopping)</span>
+<span class="linenos">28</span>    <span class="p">.</span><span class="n">withDistSettleParameters</span><span class="p">(</span>
+<span class="linenos">29</span>        <span class="mf">0.5</span><span class="n">_in</span><span class="p">,</span> <span class="c1">// Max error</span>
+<span class="linenos">30</span>        <span class="mf">2.0</span><span class="n">_in</span> <span class="o">/</span> <span class="mi">1</span><span class="n">_s</span><span class="p">,</span> <span class="c1">// Max derivative</span>
+<span class="linenos">31</span>        <span class="mi">100</span><span class="n">_ms</span> <span class="c1">// Wait time</span>
+<span class="linenos">32</span>    <span class="p">)</span>
+<span class="linenos">33</span>    <span class="p">.</span><span class="n">withTurnSettleParameters</span><span class="p">(</span>
+<span class="linenos">34</span>        <span class="mf">1.0</span><span class="n">_in</span><span class="p">,</span> <span class="c1">// Max error</span>
+<span class="linenos">35</span>        <span class="mf">2.0</span><span class="n">_in</span> <span class="o">/</span> <span class="mi">1</span><span class="n">_s</span><span class="p">,</span> <span class="c1">// Max derivative</span>
+<span class="linenos">36</span>        <span class="mi">100</span><span class="n">_ms</span> <span class="c1">// Wait time</span>
+<span class="linenos">37</span>    <span class="p">)</span>
+<span class="linenos">38</span>    <span class="p">.</span><span class="n">build</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>More information regarding the HolonomicLib API can be found <a class="reference external" href="https://yessir120.github.io/HolonomicLib/html/index.html">here</a></p>

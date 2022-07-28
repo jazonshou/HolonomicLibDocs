@@ -26,3 +26,5 @@ Welcome to HolonomicLib's documentation!
    :caption: Explanation
 
    Docs/Explanation/FieldOrientedControl
+   Docs/Explanation/Translation
+   Docs/Explanation/Pathing

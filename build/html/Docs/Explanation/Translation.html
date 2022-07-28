@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Explanation: Field Oriented Control &mdash; HolonomicLib 0.0.1 documentation</title>
+  <title>Explanation: Holonomic Translation &mdash; HolonomicLib 0.0.1 documentation</title>
   
 
   
@@ -36,15 +36,14 @@
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Explanation: Holonomic Translation" href="Translation.html" />
-    <link rel="prev" title="Autonomous Path Following" href="../Programming/AutonPathing.html" /> 
+    <link rel="next" title="Explanation: Holonomic Path Following" href="Pathing.html" />
+    <link rel="prev" title="Explanation: Field Oriented Control" href="FieldOrientedControl.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -102,8 +101,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Explanation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Explanation: Field Oriented Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Translation.html">Explanation: Holonomic Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FieldOrientedControl.html">Explanation: Field Oriented Control</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Explanation: Holonomic Translation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Pathing.html">Explanation: Holonomic Path Following</a></li>
 </ul>
 
@@ -153,13 +152,13 @@
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Explanation: Field Oriented Control</li>
+      <li>Explanation: Holonomic Translation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/Docs/Explanation/FieldOrientedControl.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/Docs/Explanation/Translation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -172,41 +171,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="explanation-field-oriented-control">
-<h1>Explanation: Field Oriented Control<a class="headerlink" href="#explanation-field-oriented-control" title="Permalink to this headline">¶</a></h1>
-<p>To understand how HolonomicLib manipulates holonomic drives, you must first
-understand how field-oriented control works. If you do not understand how
-field-oriented control works, you should check out this
-<a class="reference external" href="https://www.youtube.com/watch?v=50ZRrYFWPIc">video</a>. In a gist, regardless
-of the heading, the chassis always moves left, right, forward, and backward
-when you push the primary joystick left, right, forward, and backward respectively.</p>
-<div class="section" id="step-1-joystick-inputs">
-<h2>Step 1: Joystick Inputs<a class="headerlink" href="#step-1-joystick-inputs" title="Permalink to this headline">¶</a></h2>
-<p>Joystick inputs can be represented as vectors.</p>
-<a class="reference internal image-reference" href="../../_images/image3.PNG"><img alt="../../_images/image3.PNG" src="../../_images/image3.PNG" style="width: 312.5px; height: 306.5px;" /></a>
-<p>When the joystick is in this position, it returns 0.5 in the Y-axis and 0.5 in
-the X-axis. You can represent the joystick position as a 2D cartesian vector: <span class="math notranslate nohighlight">\((0.5, 0.5)\)</span>.</p>
-</div>
-<div class="section" id="step-2-rotate-joystick-vector">
-<h2>Step 2: Rotate Joystick Vector<a class="headerlink" href="#step-2-rotate-joystick-vector" title="Permalink to this headline">¶</a></h2>
-<p>Let’s say we have an X-Drive (works the same with mecanum drives) that is currently
-rotated 45 degrees, and we want the chassis to go in the direction <span class="math notranslate nohighlight">\((0.5, 0.5)\)</span>. Yet
-since the chassis is rotated 45 degrees, it goes the wrong direction.</p>
-<a class="reference internal image-reference" href="../../_images/image4.PNG"><img alt="../../_images/image4.PNG" src="../../_images/image4.PNG" style="width: 302.8px; height: 251.60000000000002px;" /></a>
-<a class="reference internal image-reference" href="../../_images/image5.PNG"><img alt="../../_images/image5.PNG" src="../../_images/image5.PNG" style="width: 330.40000000000003px; height: 282.40000000000003px;" /></a>
-<p>Thus, to move in the desired direction, you must compensate for the chassis’ heading
-by rotating the joystick vector 45 degrees counterclockwise.</p>
-<a class="reference internal image-reference" href="../../_images/image6.PNG"><img alt="../../_images/image6.PNG" src="../../_images/image6.PNG" style="width: 411.0px; height: 347.5px;" /></a>
-<p>You can use the <a class="reference external" href="https://matthew-brett.github.io/teaching/rotation_2d.html#theorem">vector rotation theorem</a>
-to rotate the vector.</p>
-<p><span class="math notranslate nohighlight">\(x_2=\cos(\beta x_1)-\sin(\beta y_1)\)</span></p>
-<p><span class="math notranslate nohighlight">\(y_2=\sin(\beta x_1)+\cos(\beta y_1)\)</span></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\beta\)</span> - angle to rotate by (radians)</p></li>
-<li><p><span class="math notranslate nohighlight">\((x_1, y_1)\)</span> - vector to rotate</p></li>
-<li><p><span class="math notranslate nohighlight">\((x_2, y_2)\)</span> - rotated vector</p></li>
-</ul>
-</div>
+  <div class="section" id="explanation-holonomic-translation">
+<h1>Explanation: Holonomic Translation<a class="headerlink" href="#explanation-holonomic-translation" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -215,8 +181,8 @@ to rotate the vector.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Translation.html" class="btn btn-neutral float-right" title="Explanation: Holonomic Translation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../Programming/AutonPathing.html" class="btn btn-neutral float-left" title="Autonomous Path Following" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Pathing.html" class="btn btn-neutral float-right" title="Explanation: Holonomic Path Following" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="FieldOrientedControl.html" class="btn btn-neutral float-left" title="Explanation: Field Oriented Control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

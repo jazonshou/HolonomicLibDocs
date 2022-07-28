@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
 
   
   
@@ -101,6 +102,8 @@
 <p class="caption" role="heading"><span class="caption-text">Explanation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Explanation/FieldOrientedControl.html">Explanation: Field Oriented Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Explanation/Translation.html">Explanation: Holonomic Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Explanation/Pathing.html">Explanation: Holonomic Path Following</a></li>
 </ul>
 
             
@@ -235,26 +238,25 @@ into your project.</p></li>
 <span class="linenos">17</span>    <span class="p">.</span><span class="n">buildOdometry</span><span class="p">();</span>
 <span class="linenos">18</span>
 <span class="linenos">19</span><span class="cm">/** Create HolonomicLib AsyncHolonomicChassisController - controls chassis movement */</span>
-<span class="linenos">20</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">AsyncHolonomicChassisController</span><span class="o">&gt;</span> <span class="n">controller</span> <span class="o">=</span> <span class="n">AsyncHolonomicChassisControllerBuilder</span><span class="p">()</span>
-<span class="linenos">21</span>    <span class="c1">// Output chassis controller (must be created before this)</span>
-<span class="linenos">22</span>    <span class="p">.</span><span class="n">withOutput</span><span class="p">(</span><span class="n">chassis</span><span class="p">)</span>
-<span class="linenos">23</span>    <span class="c1">// PID gains (must be tuned for your robot)</span>
-<span class="linenos">24</span>    <span class="p">.</span><span class="n">withPIDGains</span><span class="p">(</span>
-<span class="linenos">25</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">},</span> <span class="c1">// Translation gains</span>
-<span class="linenos">26</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">}</span> <span class="c1">// Turn gains</span>
-<span class="linenos">27</span>    <span class="p">)</span>
-<span class="linenos">28</span>    <span class="c1">// Tolerance (how close the chassis must be to the target before stopping)</span>
-<span class="linenos">29</span>    <span class="p">.</span><span class="n">withTolerance</span><span class="p">({</span><span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">2</span><span class="n">_in</span><span class="p">,</span> <span class="mi">1</span><span class="n">_deg</span><span class="p">})</span>
-<span class="linenos">30</span>    <span class="p">.</span><span class="n">build</span><span class="p">();</span>
-<span class="linenos">31</span>
-<span class="linenos">32</span><span class="cm">/** Opcontrol: moves chassis according to Pathplanner path */</span>
-<span class="linenos">33</span><span class="kt">void</span> <span class="nf">opcontrol</span><span class="p">()</span> <span class="p">{</span>
-<span class="linenos">34</span>    <span class="c1">// Pathplanner path: generated with Pathplanner</span>
-<span class="linenos">35</span>    <span class="c1">// Converted to TimedTrajectory via convertor.exe</span>
-<span class="linenos">36</span>    <span class="n">TimedTrajectory</span> <span class="n">path</span> <span class="o">=</span> <span class="p">{...};</span>
-<span class="linenos">37</span>
-<span class="linenos">38</span>    <span class="n">controller</span><span class="o">-&gt;</span><span class="n">setTarget</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
-<span class="linenos">39</span><span class="p">}</span>
+<span class="linenos">20</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">AsyncHolonomicChassisController</span><span class="o">&gt;</span> <span class="n">controller</span> <span class="o">=</span>
+<span class="linenos">21</span>  <span class="n">AsyncHolonomicChassisControllerBuilder</span><span class="p">(</span><span class="n">chassis</span><span class="p">)</span>
+<span class="linenos">22</span>    <span class="c1">// PID gains (must be tuned for your robot)</span>
+<span class="linenos">23</span>    <span class="p">.</span><span class="n">withDistGains</span><span class="p">(</span>
+<span class="linenos">24</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">}</span> <span class="c1">// Translation gains</span>
+<span class="linenos">25</span>    <span class="p">)</span>
+<span class="linenos">26</span>    <span class="p">.</span><span class="n">withTurnGains</span><span class="p">(</span>
+<span class="linenos">27</span>        <span class="p">{</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00065</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">}</span> <span class="c1">// Turn gains</span>
+<span class="linenos">28</span>    <span class="p">)</span>
+<span class="linenos">29</span>    <span class="p">.</span><span class="n">build</span><span class="p">();</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="cm">/** Opcontrol: moves chassis according to Pathplanner path */</span>
+<span class="linenos">32</span><span class="kt">void</span> <span class="nf">opcontrol</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">33</span>    <span class="c1">// Pathplanner path: generated with Pathplanner</span>
+<span class="linenos">34</span>    <span class="c1">// Converted to TimedTrajectory via convertor.exe</span>
+<span class="linenos">35</span>    <span class="n">TimedTrajectory</span> <span class="n">path</span> <span class="o">=</span> <span class="p">{...};</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span>    <span class="n">controller</span><span class="o">-&gt;</span><span class="n">setTarget</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+<span class="linenos">38</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>More information regarding the HolonomicLib API can be found <a class="reference external" href="https://yessir120.github.io/HolonomicLib/html/index.html">here</a></p>

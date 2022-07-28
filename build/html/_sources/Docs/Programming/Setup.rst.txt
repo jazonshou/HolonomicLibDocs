@@ -32,21 +32,113 @@ a ``OdomChassisController`` object as shown below.
     For more details on Okapi's ``OdomChassisController``,
     please checkout the `Okapi documentation <https://okapilib.github.io/OkapiLib/index.html>`_.
 
-Next, create an ``AsyncHolonomicChassisController`` object. This will be used to control the robot.
+Next, create an ``AsyncHolonomicChassisController`` object using the AsyncHolonomicChassisControllerBuilder.
+This will be used to control the robot. 
+
+1. The constructor takes an 
+   `OdomChassisController <https://okapilib.github.io/OkapiLib/classokapi_1_1OdomChassisController.html>`_
+   that will be used to move the chassis. 
+
+.. tabs::
+
+    .. tab:: Abstract
+
+        .. code-block:: cpp
+
+            std::shared_ptr<AsyncHolonomicChassisController> controller = 
+                AsyncHolonomicChassisControllerBuilder(std::shared_ptr<okapi::OdomChassisController> ichassis)    
+
+2. Configure PID controllers - you need 2 controllers: one for turning and one for translation
+
+One way you can configure the PID is by inputing the gains directly.
+
+.. tabs::
+
+    .. tab:: Abstract
+
+        .. code-block:: cpp
+
+            .withDistGains(const okapi::IterativePosPIDController::Gains &idistGains)
+            .withTurnGains(const okapi::IterativePosPIDController::Gains &iturnGains)
+
+Another way is to supply the actual PID controller objects. 
+
+.. tabs::
+
+    .. tab:: Abstract
+
+        .. code-block:: cpp
+
+            .withDistPID(std::unique_ptr<okapi::IterativePosPIDController> idistController)
+            .withTurnPID(std::unique_ptr<okapi::IterativePosPIDController> iturnController)
+
+3. (Optional) Configure the settle parameters for the PID controllers.
+
+.. tabs::
+
+    .. tab:: Abstract
+
+        .. code-block:: cpp
+
+            .withDistSettleParameters(okapi::QLength imaxError,
+                                      okapi::QSpeed imaxDerivative,
+                                      okapi::QTime iwaitTime) 
+            .withTurnSettleParameters(okapi::QLength imaxError,
+                                      okapi::QSpeed imaxDerivative,
+                                      okapi::QTime iwaitTime) 
+
+4. Finally, build the controller!
+
+.. tabs::
+
+    .. tab:: Abstract
+
+        .. code-block:: cpp
+
+            .build()
+
+Here is a complete example of what you might do. 
 
 .. code-block:: cpp
     :linenos:
 
-    std::shared_ptr<AsyncHolonomicChassisController> controller = AsyncHolonomicChassisControllerBuilder()
-        // Output chassis controller (must be created before this)
-        .withOutput(chassis)
+    std::shared_ptr<OdomChassisController> chassis = ChassisControllerBuilder()
+        .withMotors(
+            1,  // Top left
+            -2, // Top right (reversed)
+            -3, // Bottom right (reversed)
+            4   // Bottom left
+        )
+        .withSensors(
+            ADIEncoder{'A', 'B'}, // left encoder in ADI ports A & B
+            ADIEncoder{'C', 'D', true},  // right encoder in ADI ports C & D (reversed)
+            ADIEncoder{'E', 'F'}  // middle encoder in ADI ports E & F
+        )
+        // specify the tracking wheels diameter (2.75 in), track (7 in), and TPR (360)
+        // specify the middle encoder distance (1 in) and diameter (2.75 in)
+        .withOdometry({{2.75_in, 7_in, 1_in, 2.75_in}, quadEncoderTPR})
+        .buildOdometry();
+
+    std::shared_ptr<AsyncHolonomicChassisController> controller = 
+      AsyncHolonomicChassisControllerBuilder(chassis)
         // PID gains (must be tuned for your robot)
-        .withPIDGains(
-            {0.05, 0.0, 0.00065, 0.0}, // Translation gains
+        .withDistGains(
+            {0.05, 0.0, 0.00065, 0.0} // Translation gains
+        )
+        .withTurnGains(
             {0.05, 0.0, 0.00065, 0.0} // Turn gains
         )
         // Tolerance (how close the chassis must be to the target before stopping)
-        .withTolerance({2_in, 2_in, 1_deg})
+        .withDistSettleParameters(
+            0.5_in, // Max error
+            2.0_in / 1_s, // Max derivative
+            100_ms // Wait time
+        )
+        .withTurnSettleParameters(
+            1.0_in, // Max error
+            2.0_in / 1_s, // Max derivative
+            100_ms // Wait time
+        )
         .build();
 
 More information regarding the HolonomicLib API can be found `here <https://yessir120.github.io/HolonomicLib/html/index.html>`_

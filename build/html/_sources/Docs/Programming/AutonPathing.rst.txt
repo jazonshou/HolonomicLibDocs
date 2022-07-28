@@ -76,16 +76,15 @@ Here is the full example code:
         .buildOdometry();
 
     /** Create HolonomicLib AsyncHolonomicChassisController - controls chassis movement */
-    std::shared_ptr<AsyncHolonomicChassisController> controller = AsyncHolonomicChassisControllerBuilder()
-        // Output chassis controller (must be created before this)
-        .withOutput(chassis)
+    std::shared_ptr<AsyncHolonomicChassisController> controller = 
+      AsyncHolonomicChassisControllerBuilder(chassis)
         // PID gains (must be tuned for your robot)
-        .withPIDGains(
-            {0.05, 0.0, 0.00065, 0.0}, // Translation gains
+        .withDistGains(
+            {0.05, 0.0, 0.00065, 0.0} // Translation gains
+        )
+        .withTurnGains(
             {0.05, 0.0, 0.00065, 0.0} // Turn gains
         )
-        // Tolerance (how close the chassis must be to the target before stopping)
-        .withTolerance({2_in, 2_in, 1_deg})
         .build();
 
     /** Opcontrol: moves chassis according to Pathplanner path */
