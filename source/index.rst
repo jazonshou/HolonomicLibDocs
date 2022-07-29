@@ -6,6 +6,8 @@
 Welcome to HolonomicLib's documentation!
 ========================================
 
+These docs provide a step-by-step guide to using HolonomicLib. It also offers explanations to the 
+complex algorithms behind HolonomicLib. But, these docs do not cover everything HolonomicLib has. 
 For more specific information about the library, please see the 
 `API <https://yessir120.github.io/HolonomicLib/index.html>`_. 
 
@@ -29,5 +31,4 @@ For more specific information about the library, please see the
    :caption: Explanation
 
    Docs/Explanation/FieldOrientedControl
-   Docs/Explanation/Translation
-   Docs/Explanation/Pathing
+   Docs/Explanation/AutonMovement

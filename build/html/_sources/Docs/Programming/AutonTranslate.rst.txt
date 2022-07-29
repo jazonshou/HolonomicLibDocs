@@ -75,4 +75,4 @@ Here is a complete example:
         controller->setTarget({XPOSE_in, YPOSE_in, ZPOSE_deg}, true);
     }
 
-More information regarding the HolonomicLib API can be found `here <https://yessir120.github.io/HolonomicLib/html/index.html>`_
+More information regarding the HolonomicLib API can be found `here <https://yessir120.github.io/HolonomicLib/index.html>`_
