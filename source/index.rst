@@ -6,6 +6,9 @@
 Welcome to HolonomicLib's documentation!
 ========================================
 
+For more specific information about the library, please see the 
+`API <https://yessir120.github.io/HolonomicLib/index.html>`_. 
+
 .. toctree::
    :titlesonly:
    :caption: Introduction

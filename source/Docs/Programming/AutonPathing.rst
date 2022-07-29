@@ -96,4 +96,4 @@ Here is the full example code:
         controller->setTarget(path, true);
     }
 
-More information regarding the HolonomicLib API can be found `here <https://yessir120.github.io/HolonomicLib/html/index.html>`_
+More information regarding the HolonomicLib API can be found `here <https://yessir120.github.io/HolonomicLib/index.html>`_
