@@ -35,6 +35,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
@@ -172,7 +173,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="explanation-field-oriented-control">
-<h1>Explanation: Field Oriented Control<a class="headerlink" href="#explanation-field-oriented-control" title="Permalink to this headline">¶</a></h1>
+<h1>Explanation: Field Oriented Control<a class="headerlink" href="#explanation-field-oriented-control" title="Permalink to this heading">¶</a></h1>
 <p>To understand how HolonomicLib manipulates holonomic drives, you must first
 understand how field-oriented control works. If you do not understand how
 field-oriented control works, you should check out this
@@ -180,14 +181,14 @@ field-oriented control works, you should check out this
 of the heading, the chassis always moves left, right, forward, and backward
 when you push the primary joystick left, right, forward, and backward respectively.</p>
 <div class="section" id="step-1-joystick-inputs">
-<h2>Step 1: Joystick Inputs<a class="headerlink" href="#step-1-joystick-inputs" title="Permalink to this headline">¶</a></h2>
+<h2>Step 1: Joystick Inputs<a class="headerlink" href="#step-1-joystick-inputs" title="Permalink to this heading">¶</a></h2>
 <p>Joystick inputs can be represented as vectors.</p>
 <a class="reference internal image-reference" href="../../_images/image3.PNG"><img alt="../../_images/image3.PNG" src="../../_images/image3.PNG" style="width: 312.5px; height: 306.5px;" /></a>
 <p>When the joystick is in this position, it returns 0.5 in the Y-axis and 0.5 in
 the X-axis. You can represent the joystick position as a 2D cartesian vector: <span class="math notranslate nohighlight">\((0.5, 0.5)\)</span>.</p>
 </div>
 <div class="section" id="step-2-rotate-joystick-vector">
-<h2>Step 2: Rotate Joystick Vector<a class="headerlink" href="#step-2-rotate-joystick-vector" title="Permalink to this headline">¶</a></h2>
+<h2>Step 2: Rotate Joystick Vector<a class="headerlink" href="#step-2-rotate-joystick-vector" title="Permalink to this heading">¶</a></h2>
 <p>Let’s say we have an X-Drive (works the same with mecanum drives) that is currently
 rotated 45 degrees, and we want the chassis to go in the direction <span class="math notranslate nohighlight">\((0.5, 0.5)\)</span>. Yet
 since the chassis is rotated 45 degrees, it goes the wrong direction.</p>

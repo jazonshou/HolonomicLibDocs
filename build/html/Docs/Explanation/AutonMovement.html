@@ -35,6 +35,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
@@ -171,14 +172,14 @@
            <div itemprop="articleBody">
             
   <div class="section" id="explanation-holonomic-translation-path-following">
-<h1>Explanation: Holonomic Translation &amp; Path Following<a class="headerlink" href="#explanation-holonomic-translation-path-following" title="Permalink to this headline">¶</a></h1>
+<h1>Explanation: Holonomic Translation &amp; Path Following<a class="headerlink" href="#explanation-holonomic-translation-path-following" title="Permalink to this heading">¶</a></h1>
 <p>Before we get started, there are a few concepts you should understand:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="http://georgegillard.com/documents/2-introduction-to-pid-controllers">PID</a></p></li>
 <li><p><a class="reference external" href="http://thepilons.ca/wp-content/uploads/2018/10/Tracking.pdf">Odometry</a></p></li>
 </ul>
 <div class="section" id="translation">
-<h2>Translation<a class="headerlink" href="#translation" title="Permalink to this headline">¶</a></h2>
+<h2>Translation<a class="headerlink" href="#translation" title="Permalink to this heading">¶</a></h2>
 <p>Suppose you want to move from <span class="math notranslate nohighlight">\((0 in, 0 in, 0 deg)\)</span> to <span class="math notranslate nohighlight">\((12 in, 6 in, 45 deg)\)</span>.
 First, you need to calculate the X translation, y translation, and rotation
 error (if you do not understand what error is, check out the PID guide).
@@ -225,7 +226,7 @@ your field-oriented control function.</p>
 </div>
 </div>
 <div class="section" id="path-following">
-<h2>Path Following<a class="headerlink" href="#path-following" title="Permalink to this headline">¶</a></h2>
+<h2>Path Following<a class="headerlink" href="#path-following" title="Permalink to this heading">¶</a></h2>
 <p>Path following is very similar to translation. But instead of telling the
 robot to go to one position, you constantly tell the robot to travel to
 points along the path.</p>

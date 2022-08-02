@@ -34,8 +34,8 @@ release = '0.0.1'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autosectionlabel'
-    # 'sphinx_tabs.tabs'
+    'sphinx.ext.autosectionlabel',
+    'sphinx_tabs.tabs'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -62,5 +62,7 @@ html_static_path = ['_static']
 pygments_style = 'sphinx'
 
 html_sidebars = { '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'] }
+
+sphinx_tabs_valid_builders = ['linkcheck']
 
 sphinx_tabs_disable_tab_closing = True

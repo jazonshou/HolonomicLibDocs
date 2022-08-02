@@ -19,8 +19,8 @@ Installing HolonomicLib
 ***********************
 
 1. Download the latest version of `HolonomicLib <https://github.com/Yessir120/HolonomicLib/releases>`_
-   in the root of your project (it should be ``HolonomicLib@<VERSION_#>.zip``). 
-2. Run ``pros conductor fetch HolonomicLib@<VERSION_#>.zip`` 
+   in the root of your project (it should be ``HolonomicLib@VERSION_NUMBER.zip``). 
+2. Run ``pros conductor fetch HolonomicLib@VERSION_NUMBER.zip`` 
 3. Run ``pros conductor apply HolonomicLib``
 4. Add ``#include "HolonomicLib/API.hpp"`` to your header file
 
