@@ -13,7 +13,8 @@ latest version of PROS and OkapiLib installed. You can install these application
   already installed)
 
 You can check if PROS is correctly installed by running ``pros --version`` in the terminal. If 
-the terminal returns something like ``pros, version [LATEST_VERSION]``, then you are good to go!
+the terminal returns something like ``pros, version [LATEST_VERSION]`` (check out the latest 
+version `here <https://github.com/purduesigbots/pros-cli/releases>`_), then you are good to go!
 
 Installing HolonomicLib
 ***********************
