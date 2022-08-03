@@ -25,10 +25,8 @@ Installing HolonomicLib
 3. Run ``pros conductor apply HolonomicLib``
 4. Add ``#include "HolonomicLib/API.hpp"`` to your header file
 
-Installing Pathplanner (optional)
+Installing Pathplanner (required for pathing)
 *********************************
-
-If you want to follow trajectories, you must install Pathplanner. 
 
 1. Download the latest version of `Pathplanner <https://github.com/mjansen4857/pathplanner/releases>`_
 2. Download ``convertor.exe`` from `HolonomicLib <https://github.com/Yessir120/HolonomicLib/releases>`_
@@ -38,4 +36,4 @@ Hardware Prerequisites
 **********************
 
 - Must have a mecanum or X-Drive chassis
-- Must have 3 tracking wheels that are capable of using OkapiLib's odometry
+- Must have 3 tracking wheels that are capable of using OkapiLib's odometry or GPS sensor
