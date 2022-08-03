@@ -13,7 +13,8 @@ latest version of PROS and OkapiLib installed. You can install these application
   already installed)
 
 You can check if PROS is correctly installed by running ``pros --version`` in the terminal. If 
-the terminal returns something like ``pros, version [LATEST_VERSION]``, then you are good to go!
+the terminal returns something like ``pros, version [LATEST_VERSION]`` (check out the latest 
+version `here <https://github.com/purduesigbots/pros-cli/releases>`_), then you are good to go!
 
 Installing HolonomicLib
 ***********************
@@ -24,10 +25,8 @@ Installing HolonomicLib
 3. Run ``pros conductor apply HolonomicLib``
 4. Add ``#include "HolonomicLib/API.hpp"`` to your header file
 
-Installing Pathplanner (optional)
-*********************************
-
-If you want to follow trajectories, you must install Pathplanner. 
+Installing Pathplanner (required for pathing)
+*********************************************
 
 1. Download the latest version of `Pathplanner <https://github.com/mjansen4857/pathplanner/releases>`_
 2. Download ``convertor.exe`` from `HolonomicLib <https://github.com/Yessir120/HolonomicLib/releases>`_
@@ -37,4 +36,4 @@ Hardware Prerequisites
 **********************
 
 - Must have a mecanum or X-Drive chassis
-- Must have 3 tracking wheels that are capable of using OkapiLib's odometry
+- Must have 3 tracking wheels that are capable of using OkapiLib's odometry or GPS sensor

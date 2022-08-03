@@ -26,7 +26,7 @@ Installing HolonomicLib
 4. Add ``#include "HolonomicLib/API.hpp"`` to your header file
 
 Installing Pathplanner (required for pathing)
-*********************************
+*********************************************
 
 1. Download the latest version of `Pathplanner <https://github.com/mjansen4857/pathplanner/releases>`_
 2. Download ``convertor.exe`` from `HolonomicLib <https://github.com/Yessir120/HolonomicLib/releases>`_

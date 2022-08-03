@@ -35,7 +35,6 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
@@ -172,7 +171,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="getting-started">
-<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h1>
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <p>Thank you for checking out 4253B’s HolonomicLib! HolonomicLib is an advance PROS programming
 library, designed for holonomic drivetrains. To get started, please make sure you have the
 latest version of PROS and OkapiLib installed. You can install these applications here:</p>
@@ -182,9 +181,10 @@ latest version of PROS and OkapiLib installed. You can install these application
 already installed)</p></li>
 </ul>
 <p>You can check if PROS is correctly installed by running <code class="docutils literal notranslate"><span class="pre">pros</span> <span class="pre">--version</span></code> in the terminal. If
-the terminal returns something like <code class="docutils literal notranslate"><span class="pre">pros,</span> <span class="pre">version</span> <span class="pre">[LATEST_VERSION]</span></code>, then you are good to go!</p>
+the terminal returns something like <code class="docutils literal notranslate"><span class="pre">pros,</span> <span class="pre">version</span> <span class="pre">[LATEST_VERSION]</span></code> (check out the latest
+version <a class="reference external" href="https://github.com/purduesigbots/pros-cli/releases">here</a>), then you are good to go!</p>
 <div class="section" id="installing-holonomiclib">
-<h2>Installing HolonomicLib<a class="headerlink" href="#installing-holonomiclib" title="Permalink to this heading">¶</a></h2>
+<h2>Installing HolonomicLib<a class="headerlink" href="#installing-holonomiclib" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Download the latest version of <a class="reference external" href="https://github.com/Yessir120/HolonomicLib/releases">HolonomicLib</a>
 in the root of your project (it should be <code class="docutils literal notranslate"><span class="pre">HolonomicLib&#64;VERSION_NUMBER.zip</span></code>).</p></li>
@@ -193,9 +193,8 @@ in the root of your project (it should be <code class="docutils literal notransl
 <li><p>Add <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;HolonomicLib/API.hpp&quot;</span></code> to your header file</p></li>
 </ol>
 </div>
-<div class="section" id="installing-pathplanner-optional">
-<h2>Installing Pathplanner (optional)<a class="headerlink" href="#installing-pathplanner-optional" title="Permalink to this heading">¶</a></h2>
-<p>If you want to follow trajectories, you must install Pathplanner.</p>
+<div class="section" id="installing-pathplanner-required-for-pathing">
+<h2>Installing Pathplanner (required for pathing)<a class="headerlink" href="#installing-pathplanner-required-for-pathing" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Download the latest version of <a class="reference external" href="https://github.com/mjansen4857/pathplanner/releases">Pathplanner</a></p></li>
 <li><p>Download <code class="docutils literal notranslate"><span class="pre">convertor.exe</span></code> from <a class="reference external" href="https://github.com/Yessir120/HolonomicLib/releases">HolonomicLib</a>
@@ -203,10 +202,10 @@ to the root of your project</p></li>
 </ol>
 </div>
 <div class="section" id="hardware-prerequisites">
-<h2>Hardware Prerequisites<a class="headerlink" href="#hardware-prerequisites" title="Permalink to this heading">¶</a></h2>
+<h2>Hardware Prerequisites<a class="headerlink" href="#hardware-prerequisites" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Must have a mecanum or X-Drive chassis</p></li>
-<li><p>Must have 3 tracking wheels that are capable of using OkapiLib’s odometry</p></li>
+<li><p>Must have 3 tracking wheels that are capable of using OkapiLib’s odometry or GPS sensor</p></li>
 </ul>
 </div>
 </div>
