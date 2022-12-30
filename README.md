@@ -2,7 +2,7 @@
 
 The repository hosts the documentation for [HolonomicLib](https://github.com/jazonshou/HolonomicLib) @ http://holonomiclibdocs.rtfd.io/
 
-For more precise documentation of HolonomicLib, checkout its [API](https://jazonshou.github.io/HolonomicLib/html/index.html). 
+For more precise documentation of HolonomicLib, checkout its [API](https://jazonshou.github.io/HolonomicLib/index.html). 
 
 ## Building the Docs
 1. Install Sphinx by following the [guide](https://www.sphinx-doc.org/en/master/usage/installation.html). 
